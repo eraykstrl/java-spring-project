@@ -19,7 +19,7 @@ public class DtoStudentIU {
 
     @NotEmpty(message = "Name value can not be empty or null")
     @Min(value = 3)
-    @Max(value = 3)
+    @Max(value = 10)
     private String firstName;
 
     @Size(min = 3,max = 10)
