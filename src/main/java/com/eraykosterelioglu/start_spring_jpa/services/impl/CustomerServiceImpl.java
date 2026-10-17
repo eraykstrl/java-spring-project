@@ -8,9 +8,11 @@ import com.eraykosterelioglu.start_spring_jpa.repository.CustomerRepository;
 import com.eraykosterelioglu.start_spring_jpa.services.ICustomerService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Service
 public class CustomerServiceImpl implements ICustomerService {
 
     @Autowired
