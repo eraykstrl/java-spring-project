@@ -12,5 +12,5 @@ public class DtoEmployee {
 
     private String employeeName;
 
-    private Department department;
+    private DtoDepartment dtoDepartment;
 }
