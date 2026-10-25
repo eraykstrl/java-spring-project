@@ -3,6 +3,7 @@ package com.eraykosterelioglu.start_spring_jpa.services;
 import com.eraykosterelioglu.start_spring_jpa.dto.DtoStudent;
 import com.eraykosterelioglu.start_spring_jpa.dto.DtoStudentIU;
 import com.eraykosterelioglu.start_spring_jpa.entites.Student;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 

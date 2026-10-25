@@ -1,7 +1,8 @@
 package com.eraykosterelioglu.start_spring_jpa.services.impl;
 
+import com.eraykosterelioglu.start_spring_jpa.dto.DtoDepartment;
 import com.eraykosterelioglu.start_spring_jpa.dto.DtoEmployee;
-import com.eraykosterelioglu.start_spring_jpa.dto.DtoEmployeeUI;
+import com.eraykosterelioglu.start_spring_jpa.dto.DtoEmployeeIU;
 import com.eraykosterelioglu.start_spring_jpa.entites.Department;
 import com.eraykosterelioglu.start_spring_jpa.entites.Employee;
 import com.eraykosterelioglu.start_spring_jpa.repository.DepartmentRepository;
@@ -9,11 +10,13 @@ import com.eraykosterelioglu.start_spring_jpa.repository.EmployeeRepository;
 import com.eraykosterelioglu.start_spring_jpa.services.IEmployeeService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class EmployeeServiceImpl implements IEmployeeService {
 
     @Autowired
@@ -34,18 +37,22 @@ public class EmployeeServiceImpl implements IEmployeeService {
         List<DtoEmployee> dtoEmployeeList = new ArrayList<>();
         for(Employee employee : dbList) {
             DtoEmployee dtoEmployee = new DtoEmployee();
-            BeanUtils.copyProperties(employee,dtoEmployee);
+
+            DtoDepartment dtoDepartment = new DtoDepartment();
+            BeanUtils.copyProperties(employee.getDepartment(), dtoDepartment);
+
+            dtoEmployee.setDtoDepartment(dtoDepartment);
             dtoEmployeeList.add(dtoEmployee);
         }
         return dtoEmployeeList;
     }
 
     @Override
-    public DtoEmployee save(DtoEmployeeUI dtoEmployee) {
+    public DtoEmployee save(DtoEmployeeIU dtoEmployee) {
 
 
         Optional<Department> optionalDepartment = departmentRepository
-                .findDepartmentByName(dtoEmployee.getDtoDepartment().getDepartmentName());
+                .findByDepartmentName(dtoEmployee.getDtoDepartment().getDepartmentName());
 
         if(optionalDepartment.isEmpty()) {
             return null;
@@ -60,6 +67,9 @@ public class EmployeeServiceImpl implements IEmployeeService {
         DtoEmployee response = new DtoEmployee();
         BeanUtils.copyProperties(savedEmployee,response);
 
+        DtoDepartment dtoDepartment = new DtoDepartment();
+        BeanUtils.copyProperties(savedEmployee.getDepartment(),dtoDepartment);
+        response.setDtoDepartment(dtoDepartment);
         return response;
     }
 }

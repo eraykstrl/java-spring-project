@@ -2,7 +2,7 @@ package com.eraykosterelioglu.start_spring_jpa.controller.impl;
 
 import com.eraykosterelioglu.start_spring_jpa.controller.IEmployeeController;
 import com.eraykosterelioglu.start_spring_jpa.dto.DtoEmployee;
-import com.eraykosterelioglu.start_spring_jpa.dto.DtoEmployeeUI;
+import com.eraykosterelioglu.start_spring_jpa.dto.DtoEmployeeIU;
 import com.eraykosterelioglu.start_spring_jpa.services.IEmployeeService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,7 @@ public class EmployeeController implements IEmployeeController {
     @Override
     @PostMapping("/save")
     public DtoEmployee saveEmployee(
-            @RequestBody @Valid DtoEmployeeUI dtoEmployeeUI
+            @RequestBody @Valid DtoEmployeeIU dtoEmployeeUI
             ) {
         return employeeService.save(dtoEmployeeUI);
     }
